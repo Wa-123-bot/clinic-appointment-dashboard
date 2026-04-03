@@ -1,0 +1,62 @@
+<div class="page">
+  <h1>Clinic Appointment Admin Dashboard</h1>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Total Patients</h3>
+      <p>{{ totalPatients }}</p>
+    </div>
+    <div class="card">
+      <h3>Total Appointments</h3>
+      <p>{{ totalAppointments }}</p>
+    </div>
+    <div class="card">
+      <h3>Completed</h3>
+      <p>{{ completedAppointments }}</p>
+    </div>
+    <div class="card">
+      <h3>Pending</h3>
+      <p>{{ pendingAppointments }}</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Patients</h2>
+
+    <div class="form">
+      <input [(ngModel)]="patientForm.name" placeholder="Patient name" />
+      <input [(ngModel)]="patientForm.email" placeholder="Patient email" />
+      <button (click)="addPatient()">Add Patient</button>
+    </div>
+
+    <ul>
+      <li *ngFor="let patient of patients">
+        {{ patient.name }} - {{ patient.email }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Appointments</h2>
+
+    <div class="form">
+      <input [(ngModel)]="appointmentForm.patientName" placeholder="Patient name" />
+      <input [(ngModel)]="appointmentForm.date" placeholder="2026-04-03 10:00 AM" />
+      <button (click)="addAppointment()">Add Appointment</button>
+    </div>
+
+    <ul>
+      <li *ngFor="let appointment of appointments">
+        <strong>{{ appointment.patientName }}</strong>
+        - {{ appointment.date }}
+        - {{ appointment.status }}
+
+        <span class="actions">
+          <button (click)="setStatus(appointment.id, 'Pending')">Pending</button>
+          <button (click)="setStatus(appointment.id, 'Completed')">Completed</button>
+          <button (click)="setStatus(appointment.id, 'Cancelled')">Cancelled</button>
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
